@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="AI-powered customer churn prediction using an Artificial Neural Network.">
+
+    <title>ChurnAI | Customer Risk Analysis</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <a href="#" class="brand">
+        <span class="brand-mark">C</span>
+        <span>Churn<span class="brand-accent">AI</span></span>
+    </a>
+
+    <div class="model-status">
+        <span class="dot"></span>
+        ANN Model Interface
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="hero">
+        <span class="eyebrow">INTELLIGENT CUSTOMER ANALYTICS</span>
+        <h1>Predict customer <span>churn.</span></h1>
+        <p>
+            Enter customer information to predict whether a customer
+            is likely to leave your service.
+        </p>
+    </section>
+
+    <section class="panel">
+
+        <div class="panel-heading">
+            <div>
+                <span class="eyebrow">CUSTOMER PROFILE</span>
+                <h2>Customer Information</h2>
+                <p>Complete all fields to generate a prediction.</p>
+            </div>
+
+            <span class="feature-count">19 FEATURES</span>
+        </div>
+
+        <form id="predictionForm">
+
+            <!-- Personal Information -->
+
+            <h3 class="section-title">
+                01 <span>Personal Information</span>
+            </h3>
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" required>
+                        <option value="" selected disabled>Select gender</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="SeniorCitizen">Senior Citizen</label>
+                    <select id="SeniorCitizen" name="SeniorCitizen" required>
+                        <option value="" selected disabled>Select an option</option>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="Partner">Has Partner?</label>
+                    <select id="Partner" name="Partner" required>
+                        <option value="" selected disabled>Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="Dependents">Has Dependents?</label>
+                    <select id="Dependents" name="Dependents" required>
+                        <option value="" selected disabled>Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- Subscription and Services -->
+
+            <h3 class="section-title">
+                02 <span>Subscription & Services</span>
+            </h3>
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label for="tenure">Tenure (Months)</label>
+                    <input
+                        id="tenure"
+                        name="tenure"
+                        type="number"
+                        min="0"
+                        max="100"
+                        step="1"
+                        placeholder="Enter tenure in months"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="PhoneService">Phone Service</label>
+                    <select id="PhoneService" name="PhoneService" required>
+                        <option value="" selected disabled>Select phone service</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="MultipleLines">Multiple Lines</label>
+                    <select id="MultipleLines" name="MultipleLines" required>
+                        <option value="" selected disabled>Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="No phone service">No phone service</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="InternetService">Internet Service</label>
+                    <select id="InternetService" name="InternetService" required>
+                        <option value="" selected disabled>Select internet service</option>
+                        <option value="DSL">DSL</option>
+                        <option value="Fiber optic">Fiber optic</option>
+                        <option value="No">No internet service</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="OnlineSecurity">Online Security</label>
+                    <select id="OnlineSecurity" name="OnlineSecurity" required>
+                        <option value="" selected disabled>Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="No internet service">No internet service</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="OnlineBackup">Online Backup</label>
+                    <select id="OnlineBackup" name="OnlineBackup" required>
+                        <option value="" selected disabled>Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="No internet service">No internet service</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="DeviceProtection">Device Protection</label>
+                    <select id="DeviceProtection" name="DeviceProtection" required>
+                        <option value="" selected disabled>Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="No internet service">No internet service</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="TechSupport">Tech Support</label>
+                    <select id="TechSupport" name="TechSupport" required>
+                        <option value="" selected disabled>Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="No internet service">No internet service</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="StreamingTV">Streaming TV</label>
+                    <select id="StreamingTV" name="StreamingTV" required>
+                        <option value="" selected disabled>Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="No internet service">No internet service</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="StreamingMovies">Streaming Movies</label>
+                    <select id="StreamingMovies" name="StreamingMovies" required>
+                        <option value="" selected disabled>Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="No internet service">No internet service</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="Contract">Contract</label>
+                    <select id="Contract" name="Contract" required>
+                        <option value="" selected disabled>Select contract</option>
+                        <option value="Month-to-month">Month-to-month</option>
+                        <option value="One year">One year</option>
+                        <option value="Two year">Two year</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="PaperlessBilling">Paperless Billing</label>
+                    <select id="PaperlessBilling" name="PaperlessBilling" required>
+                        <option value="" selected disabled>Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="PaymentMethod">Payment Method</label>
+                    <select id="PaymentMethod" name="PaymentMethod" required>
+                        <option value="" selected disabled>Select payment method</option>
+                        <option value="Electronic check">Electronic check</option>
+                        <option value="Mailed check">Mailed check</option>
+                        <option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
+                        <option value="Credit card (automatic)">Credit card (automatic)</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="MonthlyCharges">Monthly Charges</label>
+                    <input
+                        id="MonthlyCharges"
+                        name="MonthlyCharges"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        placeholder="Enter monthly charges"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="TotalCharges">Total Charges</label>
+                    <input
+                        id="TotalCharges"
+                        name="TotalCharges"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        placeholder="Enter total charges"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <!-- Buttons -->
+
+            <div class="form-actions">
+
+                <button type="reset" class="btn btn-secondary">
+                    Clear Form
+                </button>
+
+                <button
+                    type="submit"
+                    id="predictButton"
+                    class="btn btn-primary"
+                >
+                    <span id="buttonText">Analyze Customer</span>
+                    <span aria-hidden="true">→</span>
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+    <!-- Prediction Result -->
+
+    <section
+        id="resultCard"
+        class="result-card hidden"
+        aria-live="polite"
+    >
+
+        <div class="result-header">
+            <div>
+                <span class="eyebrow">PREDICTION REPORT</span>
+                <h2 id="resultTitle">Prediction Result</h2>
+                <p id="resultDescription"></p>
+            </div>
+
+            <div id="resultIcon" class="result-icon">✓</div>
+        </div>
+
+        <div class="probability-header">
+            <span>Predicted Churn Probability</span>
+            <strong id="probabilityValue">0%</strong>
+        </div>
+
+        <div class="progress-track">
+            <div id="probabilityBar" class="progress-fill"></div>
+        </div>
+
+        <p id="resultFootnote" class="result-footnote"></p>
+
+    </section>
+
+    <p id="statusMessage" class="status-message" role="status"></p>
+
+    <footer>
+        ChurnAI · Artificial Neural Network · Customer Retention
+    </footer>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
